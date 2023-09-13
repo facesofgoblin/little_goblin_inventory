@@ -37,11 +37,13 @@ Link Adaptable: https://little-goblin-inventory.adaptable.app/main
     G. Membuat model
     1. Mengimpor models pada ```models.py``` di direktori aplikasi main
     2. Kemudian buatlah sebuah kelas dengan nama model yang diinginkan dan lengkapi kelas tersebut dengan atribut-atribut yang diperlukan serta tipe data atribut yang sesuai
-    4. Jangan lupa untuk melakukan migrasi model tiap melakukan perubahan terhadap model dengan ```makemigrations``` dan ```migrate```
+    4. Jangan lupa untuk melakukan migrasi model tiap melakukan perubahan terhadap model 
+        ```python manage.py makemigrations``` untuk mekciptakan perubahan model.
+        ```python manage.py migrate```       untuk mengimplementasikan perubahan model tersebut.
 
     H. Membuat fungsi pada views.py
-    1. Buka berkas ```views.py``` di folder main kemudian impor fungsi ```render``` yang berfungsi untuk me-render tampilan HTML 
-    2. Membuat fungsi ```show_main``` di bawah impor yang akan menampilkan data yang ada:
+    1. Buka berkas ```views.py``` di folder main kemudian impor fungsi ```render```: ```from django.shortcuts import render``` yang berfungsi untuk me-render tampilan HTML 
+    2. Membuat fungsi ```show_main``` di bawah impor yang akan menampilkan data yang ada dan mereturn 3 argumen yaitu request, "main.html", context :
 
         def show_main(request):
         context = {
@@ -52,21 +54,20 @@ Link Adaptable: https://little-goblin-inventory.adaptable.app/main
 
     I. Routing URL aplikasi main
     1. Membuat berkas ```urls.py``` di direktori ```main``` dan mengisi berkas dengan kode berikut: 
-
-
+    
         from django.urls import path //mendefinisikan pola URL
         from main.views import show_main //memanggil fungsi show_main
 
         app_name = 'main'
 
-        urlpatterns = [
-            path('', show_main, name='show_main'),
+        urlpatterns = [ //variabel urlpatterns berupa list 
+            path('', show_main, name='show_main'),      // parameter fungsi path, terdapat fungsi show_main yang diimpor 
         ]
     
     J. Deployment App
     1. Membuat akun adaptable dan menghubungkannya dengan seluruh repositori github kita
     2. Memilih repositori yang akan dideploy, repositori saya ```little_goblin_inventory```
-    3. Memilih template app dan tipe basis data yang diperlukan 
+    3. Memilih template app ```Python``` dan tipe basis data ```PostgreSQL```  
     4. Menyesuaikan tipe python, tipe saya adalah 3.10.6 
     5. Memasukkan start command ```python manage.py migrate && gunicorn nama_repositori.wsgi```
     6. Masukkan nama aplikasi dan centang bagian HTTP Listener on PORT
@@ -76,6 +77,8 @@ Link Adaptable: https://little-goblin-inventory.adaptable.app/main
 
 
 2. Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html.
+
+
     ![alt text](IMG_2134.jpg)
 
     atau
@@ -117,7 +120,7 @@ Link Adaptable: https://little-goblin-inventory.adaptable.app/main
 
 4. Jelaskan apakah itu MVC, MVT, MVVM dan perbedaan dari ketiganya.
    ![alt text](https://miro.medium.com/v2/resize:fit:1400/1*sIwF6PKHDQl59SdKOYbsPA.jpeg)
-   
+
     MVC, MVT, dan MVVM adalah 3 desain arsitektur di pengembangan perangkat lunak yang populer.
 
     - MVC (Model-View-Controller): Desain arsitektur yang memisahkan aplikasi menjadi tiga komponen utama: Model (logika aplikasi dan data), View (tampilan UI), dan Controller (manajemen interaksi antara Model dan View).
