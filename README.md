@@ -37,8 +37,10 @@ Link Adaptable: https://little-goblin-inventory.adaptable.app/main
     G. Membuat model
     1. Mengimpor models pada ```models.py``` di direktori aplikasi main
     2. Kemudian buatlah sebuah kelas dengan nama model yang diinginkan dan lengkapi kelas tersebut dengan atribut-atribut yang diperlukan serta tipe data atribut yang sesuai
-    4. Jangan lupa untuk melakukan migrasi model tiap melakukan perubahan terhadap model 
-        ```python manage.py makemigrations``` untuk mekciptakan perubahan model.
+    4. Jangan lupa untuk melakukan migrasi model tiap melakukan perubahan terhadap model
+
+        ```python manage.py makemigrations``` untuk menciptakan perubahan model.
+
         ```python manage.py migrate```       untuk mengimplementasikan perubahan model tersebut.
 
     H. Membuat fungsi pada views.py
