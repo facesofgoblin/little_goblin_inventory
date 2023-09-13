@@ -96,7 +96,7 @@ Link Adaptable: https://little-goblin-inventory.adaptable.app/main
 
 
 2. Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html.
-    ![alt text](/Users/ranakoesumastuti/Documents/little_goblin_inventory/IMG_2134.jpg)
+    ![alt text](IMG_2134.jpg)
     atau
     ![alt text](https://www.tutorialandexample.com/wp-content/uploads/2020/01/Life-Cycle-of-Django.png)
 
