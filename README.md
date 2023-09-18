@@ -199,19 +199,19 @@ P E N J E L A S A N  T U G A S  P B P  3
 
 - SCREEN SHOT POST MAN 
 1. HTML
-    ![alt text](SCREEN SHOT POSTMAN/HTML.png)
+    ![alt text](https://github.com/facesofgoblin/little_goblin_inventory/blob/main/SCREEN%20SHOT%20POSTMAN/HTML.png)
 
 2. XML
-    ![alt text](SCREEN SHOT POSTMAN/XML.png)
+    ![alt text](https://github.com/facesofgoblin/little_goblin_inventory/blob/main/SCREEN%20SHOT%20POSTMAN/XML.png)
 
 3. XML BY ID
-    ![alt text](SCREEN SHOT POSTMAN/XML_ID.png)
+    ![alt text](https://github.com/facesofgoblin/little_goblin_inventory/blob/main/SCREEN%20SHOT%20POSTMAN/XML_ID.png)
 
 4. JSON
-    ![alt text](SCREEN SHOT POSTMAN/JSON.png)
+    ![alt text](https://github.com/facesofgoblin/little_goblin_inventory/blob/main/SCREEN%20SHOT%20POSTMAN/JSON.png)
 
 5. JSON BY ID
-    ![alt text](SCREEN SHOT POSTMAN/JSON_ID.png)
+    ![alt text](https://github.com/facesofgoblin/little_goblin_inventory/blob/main/SCREEN%20SHOT%20POSTMAN/JSON_ID.png)
 
 
 
