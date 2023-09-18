@@ -55,7 +55,7 @@ ROOT_URLCONF = 'little_goblin_inventory.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'], # Penambahan Kode agar base.html terdeteksi sbg berkas template
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

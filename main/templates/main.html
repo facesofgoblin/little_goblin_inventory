@@ -1,8 +1,46 @@
-<h1>Inventory System </h1>
-<h5>Application's Name:</h5>
-<p>{{application}}</p>
-<h5>Name: </h5>
-<p>{{name}}</p> <!-- Ubahlah sesuai dengan nama kamu -->
-<h5>Class: </h5>
-<p>{{class}}</p> <!-- Ubahlah sesuai dengan kelas kamu -->
+{% extends 'base.html' %}
 
+{% block content %}
+    <h1>Little Goblin's Inventory System</h1>
+
+    <h5>Name:</h5>
+    <p>{{name}}</p>
+
+    <h5>Class:</h5>
+    <p>{{class}}</p>
+
+    <h5>Kamu menyimpan {{product_count}} item pada aplikasi ini</h5>
+
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Date Added</th>
+        </tr>
+
+        {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
+
+        {% for product in products %}
+
+            <tr>
+                <td>{{product.name}}</td>
+                <td>{{product.price}}</td>
+                <td>{{product.description}}</td>
+                <td>{{product.date_added}}</td>
+            </tr>
+        
+        {% endfor %}
+
+    </table>
+
+    <br />
+
+    <a href="{% url 'main:create_product' %}">
+        <button>
+            Add New Product
+        </button>
+    </a>
+
+
+{% endblock content %}

@@ -18,8 +18,8 @@ from django.contrib import admin
 # from django.urls import path
 from django.urls import path, include
 
-
+#mengubah url pattern untuk mengatur routing dr /main ke /
 urlpatterns = [
+    path('', include('main.urls')),
     path('admin/', admin.site.urls),
-    path('main/', include('main.urls')),
 ]

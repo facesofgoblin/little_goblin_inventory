@@ -6,6 +6,7 @@ Kelas   : PBP A
 
 Link Adaptable: https://little-goblin-inventory.adaptable.app/main
 
+PENJELASAN TUGAS 2 PBP 
 1. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
     A. Inisiasi, Pengaktifan Virtual Environment
     1. Membuat repositori lokal 
@@ -27,7 +28,7 @@ Link Adaptable: https://little-goblin-inventory.adaptable.app/main
     E. Membuat Aplikasi main di proyek little_goblin_inventory
     1. Jalankan perintah berikut untuk membuat aplikasi baru berisi struktur awal. Pada direktori tersebut juga terdapat file-file seperti ```models.py```, ```views.py```, ```urls.py```, dsb.
         python manage.py startapp main
-    2. Setiap kali kita ingin mendaftarkan aplikasi, kita dapat membuka berkas ```settings.py``` di dalam direktori proyek dan menambahkan    nama aplikasi ke variabel ```INSTALLED_APPS```.
+    2. Setiap kali kita ingin mendaftarkan aplikasi, kita dapat membuka berkas ```settings.py``` di dalam direktori proyek dan menambahkan nama aplikasi ke variabel ```INSTALLED_APPS```.
 
     F. Routing pada proyek
     1. Buka berkas ```urls.py``` di dalam direktori proyek dan impor fungsi ```include``` dari ```django.urls```.
@@ -132,3 +133,89 @@ Link Adaptable: https://little-goblin-inventory.adaptable.app/main
     - MVVM (Model-View-ViewModel): Konsep yang digunakan dalam pengembangan aplikasi berbasis web, di mana ViewModel memisahkan Model dan View, memungkinkan pengikatan data yang lebih kuat.
 
     Perbedaan utama antara ketiganya adalah bagaimana mereka mengatur dan memisahkan komponen aplikasi, serta cara mereka mengelola aliran data antara Model, View, dan Controller/Template/ViewModel. MVP dan MVT menggunakan komponen mediator antara 'model' dan 'view' yaitu 'controller' atau 'presenter'. MVC adalah desain paling sederhana. Sedangkan MVP dan MVVM lebih fleksibel dan memungkinkan operasi lebih bersih terkait isu antara lapisan berbeda dari aplikasi. Django menggunakan pendekatan MVT yang mirip dengan MVC.
+
+
+P E N J E L A S A N  T U G A S  P B P  3
+- Apa perbedaan antara form POST dan form GET dalam Django?
+    Perbedaan antara POST dan GET dalam django adalah cara keduanya menyimpan data.
+
+    ![alt text](https://i.ytimg.com/vi/yzfjipuHdiU/maxresdefault.jpg)
+
+    1. POST adalah metode pengiriman data dari formulir HTML ke server yang lebih aman karena data tidak terlihat di URL dan lebih cocok untuk mengirim data sensitif atau besar seperti file gambar. Data dikirim melalui badan permintaan HTTP dan tidak tersimpan dalam cache peramban web.
+    2. GET adalah metode di mana data dikirim melalui URL dan dapat terlihat oleh siapa saja yang melihat URL. Ini cocok untuk permintaan yang bisa di-bookmark atau dibagikan dengan mudah, tetapi tidak cocok untuk data sensitif atau besar. Data GET bisa disimpan dalam cache peramban web.
+
+- Apa perbedaan utama antara XML, JSON, dan HTML dalam konteks pengiriman data?
+    XML (eXtensible Markup Language) adalah format yang fleksibel dengan tag hierarkis yang kompleks.
+    JSON (JavaScript Object Notation) adalah format data yang lebih ringkas dengan struktur objek sederhana mirip JavaScript.
+    HTML (HyperText Markup Language) adalah bahasa markup untuk membuat halaman web.
+
+- Mengapa JSON sering digunakan dalam pertukaran data antara aplikasi web modern?
+    JSON sering digunakan dalam aplikasi web modern karena ringkas, mudah dibaca, terintegrasi dengan JavaScript, cepat di-parse, dan didukung di server dan klien.
+
+- Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+    A. LANGKAH AWAL
+    1. Sebelum membuat input form, kita akan melakukan routing dari ```/main``` ke ```/``` dan membuat kerangka views dari situs web kita.
+    2. Membuat berkas ```base.html``` pada root folder dan menjadikannya sebagai berkas template 
+
+    B. MEMBUAT FORM INPUT DATA
+    1. pada direktori ```main``` buatlah berkas baru ```forms.py``` dan isi dengan suatu kelas yang berisi model dan fields yang diperlukan
+    2. Melakukan import yang diperlukan pada ```views.py``` dan membuat suatu fungsi yang menerima parameter ```request``` dengan tambahan beberapa kode seperti:
+
+    ```form = ProductForm(request.POST or None)```, ```form.is_valid()```, ```form.save()```, ```return HttpResponseRedirect(reverse('main:show_main'))```. 
+
+    Sehingga form dapat menambahkan data produk secara otomatis ketika sebuah data di-submit dari form.
+
+    3. Memodifikasi kode pada fungsi ```show_main``` dengan ```Product.objects.all()``` agar seluruh objek Product yang tersimpan di database dapat terambil. 
+
+    4. Mengimpor fungsi yang kita buat pada langkah 2 dan 3 di ```urls.py``` pada folder ```main``` dan juga menambahkan path url ke dalam ```urlpatterns```
+
+    5. Buat file pada direktori main/templates ```create_product.html```  dan ```main.html``` (memodifikasi yang sudah ada) yang meng-extend ```base.html``` dengan potongan kode untuk menampilkan produk dalam bentuk tabel dan tombol yang bisa mengarahkan ke halaman lain.
+
+    C. MENAMPILKAN DATA DALAM BENTUK LAIN
+    1. Buka views.py yang ada pada folder main dan tambahkan import HttpResponse dan Serializer pada bagian paling atas.
+    2. Buatlah sebuah fungsi yang menerima parameter request dengan nama show_jenisFormat (seperti show_xml, show_json, dsb) dan buatlah sebuah variabel di dalam fungsi tersebut yang menyimpan hasil query dari seluruh data yang ada pada Model.
+    3. Tambahkan return function berupa HttpResponse yang berisi parameter data hasil query yang sudah diserialisasi menjadi jenis format yang digunakan dan parameter content_type="application/jenisFormat".
+
+            Berikut adalah contoh fungsi view pada jenis format tanpa id:
+            ```
+            def show_jenisFormat(request):
+                data = namaModel.objects.all()
+                return HttpResponse(serializers.serialize("jenisFormat", data), content_type="application/jenisFormat")
+            ```
+
+            Berikut adalah contoh fungsi view pada jenis format dengan id:
+            ```
+            def show_jenisFormat_by_id(request, id):
+                data = namaModel.objects.filter(pk=id)
+                return HttpResponse(serializers.serialize("jenisFormat", data), content_type="application/jenisFormat")
+            ```
+
+    4. Tambahkan path url ke dalam urlpatterns untuk mengakses fungsi yang sudah diimpor tadi.
+
+            ...
+            path('jenisFormat/', show_jenisFormat, name='show_jenisFormat'), 
+            ...
+    5. Lakukan langkah ini sesuai dengan jenis format yang digunakan
+
+- SCREEN SHOT POST MAN 
+1. HTML
+    ![alt text](SCREEN SHOT POSTMAN/HTML.png)
+
+2. XML
+    ![alt text](SCREEN SHOT POSTMAN/XML.png)
+
+3. XML BY ID
+    ![alt text](SCREEN SHOT POSTMAN/XML_ID.png)
+
+4. JSON
+    ![alt text](SCREEN SHOT POSTMAN/JSON.png)
+
+5. JSON BY ID
+    ![alt text](SCREEN SHOT POSTMAN/JSON_ID.png)
+
+
+
+
+
+
+
