@@ -213,7 +213,8 @@ PENJELASAN TUGAS PBP 3
 5. JSON BY ID
     ![alt text](https://github.com/facesofgoblin/little_goblin_inventory/blob/main/SCREEN%20SHOT%20POSTMAN/JSON_ID.png)
 
-
+6. TAMPILAN HTML
+    ![alt text](https://github.com/facesofgoblin/little_goblin_inventory/blob/main/SCREEN%20SHOT%20POSTMAN/HTML_TAMPILAN.png)
 
 
 
