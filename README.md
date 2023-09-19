@@ -135,7 +135,7 @@ PENJELASAN TUGAS 2 PBP
     Perbedaan utama antara ketiganya adalah bagaimana mereka mengatur dan memisahkan komponen aplikasi, serta cara mereka mengelola aliran data antara Model, View, dan Controller/Template/ViewModel. MVP dan MVT menggunakan komponen mediator antara 'model' dan 'view' yaitu 'controller' atau 'presenter'. MVC adalah desain paling sederhana. Sedangkan MVP dan MVVM lebih fleksibel dan memungkinkan operasi lebih bersih terkait isu antara lapisan berbeda dari aplikasi. Django menggunakan pendekatan MVT yang mirip dengan MVC.
 
 
-P E N J E L A S A N  T U G A S  P B P  3
+PENJELASAN TUGAS PBP 3
 - Apa perbedaan antara form POST dan form GET dalam Django?
     Perbedaan antara POST dan GET dalam django adalah cara keduanya menyimpan data.
 
