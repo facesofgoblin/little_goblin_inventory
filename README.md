@@ -145,15 +145,17 @@ PENJELASAN TUGAS PBP 3
     2. GET adalah metode di mana data dikirim melalui URL dan dapat terlihat oleh siapa saja yang melihat URL. Ini cocok untuk permintaan yang bisa di-bookmark atau dibagikan dengan mudah, tetapi tidak cocok untuk data sensitif atau besar. Data GET bisa disimpan dalam cache peramban web.
 
 - Apa perbedaan utama antara XML, JSON, dan HTML dalam konteks pengiriman data?
-    XML (eXtensible Markup Language) adalah format yang fleksibel dengan tag hierarkis yang kompleks.
-    JSON (JavaScript Object Notation) adalah format data yang lebih ringkas dengan struktur objek sederhana mirip JavaScript.
-    HTML (HyperText Markup Language) adalah bahasa markup untuk membuat halaman web.
+    - XML (eXtensible Markup Language) adalah format yang fleksibel dengan tag hierarkis yang kompleks, dinamis, dan case sensitive karna berkaitan dengan transportasi data. Pengiriman data lebih lambat daripada JSON karena data diekstrak dari tags. Meskipun demikian, XML dinilai lebih aman daripada JSON. 
+
+    - JSON (JavaScript Object Notation) adalah format data yang lebih ringkas dengan struktur objek sederhana mirip JavaScript. JSON mengirimkan data lebih cepat dan data didefinisikan jelas sebagai object dan value. Selain itu penulisan sintaks lebih mudah dan kode yang dihasilkan lebih sedikit daripada XML.
+
+    - HTML (HyperText Markup Language) adalah bahasa markup untuk membuat halaman web. HTML bersifat statis karena itu terkait dengan tampilan data dan case insensitive. Data akan tersimpan di dalam HTML ketika HTML digunakan untuk menampilkan data. 
 
 - Mengapa JSON sering digunakan dalam pertukaran data antara aplikasi web modern?
     JSON sering digunakan dalam aplikasi web modern karena ringkas, mudah dibaca, terintegrasi dengan JavaScript, cepat di-parse, dan didukung di server dan klien.
 
 - Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
-    A. LANGKAH AWAL
+    A. LANGKAH AWAL: ROUTING
     1. Sebelum membuat input form, kita akan melakukan routing dari ```/main``` ke ```/``` dan membuat kerangka views dari situs web kita.
     2. Membuat berkas ```base.html``` pada root folder dan menjadikannya sebagai berkas template 
 
@@ -172,6 +174,7 @@ PENJELASAN TUGAS PBP 3
     5. Buat file pada direktori main/templates ```create_product.html```  dan ```main.html``` (memodifikasi yang sudah ada) yang meng-extend ```base.html``` dengan potongan kode untuk menampilkan produk dalam bentuk tabel dan tombol yang bisa mengarahkan ke halaman lain.
 
     C. MENAMPILKAN DATA DALAM BENTUK LAIN
+    UNTUK SETIAP TIPE DATA YANG DITAMPILKAN, LAKUKAN LANGKAH BERIKUT:
     1. Buka views.py yang ada pada folder main dan tambahkan import HttpResponse dan Serializer pada bagian paling atas.
     2. Buatlah sebuah fungsi yang menerima parameter request dengan nama show_jenisFormat (seperti show_xml, show_json, dsb) dan buatlah sebuah variabel di dalam fungsi tersebut yang menyimpan hasil query dari seluruh data yang ada pada Model.
     3. Tambahkan return function berupa HttpResponse yang berisi parameter data hasil query yang sudah diserialisasi menjadi jenis format yang digunakan dan parameter content_type="application/jenisFormat".
