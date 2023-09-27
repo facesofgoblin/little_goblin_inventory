@@ -221,5 +221,144 @@ PENJELASAN TUGAS PBP 3
 
 
 
+PENJELASAN TUGAS PBP 4
+1. Django UserCreationForm adalah salah satu bentuk form yang disediakan oleh framework Django untuk memudahkan pembuatan formulir pendaftaran pengguna (user registration). Form ini digunakan untuk mengumpulkan data yang diperlukan saat pengguna mendaftar, seperti nama pengguna (username) dan kata sandi (password). Kelebihan dari Django UserCreationForm adalah sebagai berikut:
+   - Memiliki validasi bawaan untuk memastikan data yang dimasukkan oleh pengguna sesuai dengan aturan yang ditentukan.
+   - Memudahkan pengembang web dalam membuat halaman pendaftaran pengguna dengan cepat dan efisien.
+   - Terintegrasi dengan sistem otentikasi Django, sehingga pengguna yang terdaftar dapat masuk ke aplikasi dengan mudah.
+   - Dapat disesuaikan (customized) sesuai dengan kebutuhan proyek.
+
+   Kelemahan dari Django UserCreationForm adalah keterbatasannya dalam hal penyesuaian (customization). Jika proyek Anda memerlukan fitur pendaftaran pengguna yang sangat khusus, mungkin Anda perlu membuat formulir pendaftaran sendiri yang lebih kompleks.
+
+2. Dalam konteks Django:
+   - Autentikasi adalah proses memverifikasi identitas seorang pengguna. Ini melibatkan penggunaan nama pengguna (username) dan kata sandi (password) untuk memastikan bahwa pengguna adalah orang yang mereka klaim.
+   - Otorisasi adalah proses memverifikasi apa yang dapat diakses oleh pengguna setelah mereka terautentikasi. Ini berkaitan dengan hak akses dan izin pengguna terhadap berbagai bagian dari aplikasi web.
+
+   Keduanya penting dalam aplikasi web karena:
+   - Autentikasi memastikan bahwa hanya pengguna yang sah yang dapat mengakses aplikasi dengan hak akses yang sesuai.
+   - Otorisasi mengendalikan apa yang dapat dilihat dan dilakukan oleh pengguna setelah mereka terautentikasi, sehingga menjaga keamanan dan privasi data.
+
+3. Cookies dalam konteks aplikasi web adalah berkas teks yang disimpan pada komputer pengguna dan digunakan untuk menyimpan informasi sesi atau preferensi pengguna. Django menggunakan cookies untuk mengelola data sesi pengguna dengan menyimpan informasi seperti ID sesi, preferensi bahasa, atau data lain yang perlu diingat selama interaksi dengan aplikasi. Ini membantu aplikasi web menjaga keadaan sesi pengguna dari satu permintaan ke permintaan berikutnya.
+
+   Django memiliki dukungan bawaan untuk mengelola cookies melalui modul `django.contrib.sessions.middleware.SessionMiddleware`. Modul ini memungkinkan pengembang untuk menyimpan dan mengambil data sesi pengguna dengan mudah.
+
+4. Penggunaan cookies pada umumnya aman dalam pengembangan web, terutama jika digunakan sesuai dengan praktik terbaik. Namun, ada beberapa risiko potensial yang harus diwaspadai:
+
+   - **Cookies Sniffing**: Meskipun data pada cookies biasanya dienkripsi, jika koneksi pengguna tidak aman (misalnya, melalui HTTP daripada HTTPS), data pada cookies dapat disadap oleh pihak yang tidak berwenang.
+
+   - **Cookies Poisoning**: Ini terjadi ketika data pada cookies dimodifikasi oleh pihak yang tidak berwenang. Hal ini dapat mengakibatkan masalah keamanan dan kerentanan terhadap serangan.
+
+   - **Cookies Theft**: Cookies yang disimpan pada komputer pengguna dapat dicuri jika komputer tersebut tidak aman. Oleh karena itu, penting untuk menyimpan informasi sensitif dalam cookies dengan bijak dan menggunakan metode enkripsi jika diperlukan.
+
+   - **Cookies Tracking**: Beberapa pihak dapat menggunakan cookies untuk melacak aktivitas pengguna secara online. Ini dapat menjadi masalah privasi jika tidak diatur dengan baik.
+
+Untuk mengatasi potensi risiko ini, penting untuk menggunakan HTTPS untuk mengenkripsi lalu lintas data, menghindari menyimpan data sensitif dalam cookies, dan mengimplementasikan praktik keamanan lainnya dalam pengembangan web Anda.
+
+5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+    A. Membuat Fungsi Registrasi, Login, dan Logout 
+    [FUNGSI REGISTRASI]
+    1. Setelah mengaktifkan vritual environment, impor modul yang diperlukan yaitu ```redirect```, ```UserCreationForm```. dan ```messages```
+    2. Membuat suatu fungsi bernama ```register``` yang menerima parameter ```request``` untuk menghasilkan formulir registrasi secara otomatis dan menghasilkan akun pengguna ketika data di-submit dari form.
+    3. Membuat berkas html baru pada folder templates di folder main berjudul ```register.html``` untuk mengatur tampilan registrasi pengguna 
+    4. Pada berkas urls.py, impor fungsi yang tadi dibuat di ```views.py``` dan tambahkan path url pada urlpatterns untuk mengakses fungsi registrasi
+
+    [FUNGSI LOG IN]
+    1. Setelah mengaktifkan vritual environment, impor modul yang diperlukan yaitu ```authenticate, logout```
+    2. Membuat suatu fungsi bernama ```login_user``` yang menerima parameter ```request```. Pada fungsi ini akan memanfaatkan ```request.POST.get()``` untuk mendapatkan username dan password user yang kemudian akan di autentikasi dengan pemanggilan ```authenticate(request, username=username, password=password)```
+    3. Membuat berkas html baru pada folder templates di folder main berjudul ```login.html``` untuk mengatur tampilan registrasi pengguna 
+    4. Pada berkas urls.py, impor fungsi yang tadi dibuat di ```views.py``` dan tambahkan path url pada urlpatterns untuk mengakses fungsi login
+
+    [FUNGSI LOGOUT]
+    1. Setelah mengaktifkan vritual environment, impor modul yang diperlukan yaitu ```authenticate, logout```
+    2. Membuat suatu fungsi bernama ```logout_user``` yang menerima parameter ```request```. 
+    3. Membuat berkas html baru pada folder templates di folder main berjudul ```logout.html``` untuk mengatur tampilan registrasi pengguna 
+    4. Pada berkas urls.py, impor fungsi yang tadi dibuat di ```views.py``` dan tambahkan path url pada urlpatterns untuk mengakses fungsi logout
+
+    B. Membuat dua akun dan 3 data dummy
+    1. Aktifkan virtual environment terlebih dahulu dengan menjalankan perintah ```source env/bin/activate```
+    2. Pada terminal lokal jalankan ```python3 manage.py runserver```
+    3. Buka ```http://localhost:8000/```
+    4. Pada halaman web buat akun pada halaman registrasi  dan klik submit
+    5. Login kembali dengan username dan password yang telah dibuat
+    6. Ketika sudah berhasil masuk, buat produk dengan memencet tombol ```Add Product```. Lakukan langkah ini sebanyak 3x
+    7. Ulangi langkah 4-6 sekali lagi
+
+        Berikut akun dan password yang telah saya buat:
+        1. rana.koesumastuti, password: ayamjago
+        2. leminerale, password: airminumya
+
+    C. Menghubungkan Item dengan User
+    1. untuk menghubungkan satu produk dengan satu user melalui sebuah relationship, buka models.py yang ada pada subdirektori main dan impor
+        ```
+        from django.contrib.auth.models import User
+        ```
+        dan menambahkan kode berikut pada class Item:
+        ```
+        user = models.ForeignKey(User, on_delete=models.CASCADE)
+        ```
+    2. Buka views.py yang ada pada subdirektori main, dan ubah potongan kode pada fungsi create_product menjadi sebagai berikut:
+
+        def create_product(request):
+        form = ProductForm(request.POST or None)
+
+        if form.is_valid() and request.method == "POST":
+            product = form.save(commit=False)
+            product.user = request.user
+            product.save()
+            return HttpResponseRedirect(reverse('main:show_main'))
+        ...
+
+        commit=False digunakan untuk mencegah penyimpanan langsung ke database, memungkinkan modifikasi objek sebelum disimpan.
+        Objek produk dihubungkan dengan pengguna yang sedang login melalui field user.
+
+    3. Ubah fungsi show_main menjadi sebagai berikut.
+        ```
+        def show_main(request):
+            products = Product.objects.filter(user=request.user)
+
+            context = {
+                'name': request.user.username,
+            ...
+        ...
+        ```
+        Produk yang terkait dengan pengguna yang sedang login diambil dari database.
+        Username pengguna yang login ditampilkan di halaman utama.
+
+        Seharusnya, akan muncul error saat melakukan migrasi model. Pilih 1 untuk menetapkan default value untuk field user pada semua row yang telah dibuat pada basis data.
+
+    4. Migrations-1
+        Jalankan ```python manage.py migrate```
+        Ketik angka 1 lagi untuk menetapkan user dengan ID 1 (yang sudah kita buat sebelumnya) pada model yang sudah ada.
+
+    5. Migrations-2
+        Lakukan ```python manage.py migrate``` untuk mengaplikasikan migrasi yang dilakukan pada poin sebelumnya.
+    
+    D. Cookies
+    1. Buka berkas views.py di subdirektori main dan tambahkan impor HttpResponseRedirect, reverse, dan datetime di bagian atas berkas.
+    python
+    2. Pada fungsi login_user, tambahkan kode untuk menambahkan cookie last_login untuk melacak waktu terakhir pengguna melakukan login. Gantilah blok kode jika pengguna tidak None dengan kode berikut:
+        ```
+        if user is not None:
+            login(request, user)
+            response = HttpResponseRedirect(reverse("main:show_main")) 
+            response.set_cookie('last_login', str(datetime.datetime.now()))
+            return response
+        ```
+    3. Pada fungsi show_main, tambahkan 'last_login': request.COOKIES['last_login'] ke dalam variabel context:
+    4. Ubah fungsi logout_user menjadi seperti berikut untuk menghapus cookie last_login saat pengguna logout:
+        ```
+        def logout_user(request):
+            logout(request)
+            response = HttpResponseRedirect(reverse('main:login'))
+            response.delete_cookie('last_login')
+            return response
+        ```
+    5. Buka berkas main.html dan tambahkan kode berikut di antara tabel dan tombol logout untuk menampilkan data last login:
+    ```
+        <h5>Sesi terakhir login: {{ last_login }}</h5>
+    ```
+    6. Data pengguna terakhir login akan muncul di halaman main dan cookie akan dihapus ketika pengguna logout. Inspect element dan membuka bagian Application/Storage. Klik bagian Cookies dan kamu dapat melihat data cookies yang tersedia.
+    
+
 
 
