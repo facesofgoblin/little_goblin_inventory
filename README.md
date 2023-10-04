@@ -228,7 +228,7 @@ PENJELASAN TUGAS PBP 4
    - Terintegrasi dengan sistem otentikasi Django, sehingga pengguna yang terdaftar dapat masuk ke aplikasi dengan mudah.
    - Dapat disesuaikan (customized) sesuai dengan kebutuhan proyek.
 
-   Kelemahan dari Django UserCreationForm adalah keterbatasannya dalam hal penyesuaian (customization). Jika proyek Anda memerlukan fitur pendaftaran pengguna yang sangat khusus, mungkin Anda perlu membuat formulir pendaftaran sendiri yang lebih kompleks.
+   Kelemahan dari Django UserCreationForm adalah keterbatasannya dalam hal penyesuaian (customization). Jika proyek kita memerlukan fitur pendaftaran pengguna yang sangat khusus, mungkin kita perlu membuat formulir pendaftaran sendiri yang lebih kompleks.
 
 2. Dalam konteks Django:
    - Autentikasi adalah proses memverifikasi identitas seorang pengguna. Ini melibatkan penggunaan nama pengguna (username) dan kata sandi (password) untuk memastikan bahwa pengguna adalah orang yang mereka klaim.
@@ -252,7 +252,7 @@ PENJELASAN TUGAS PBP 4
 
    - **Cookies Tracking**: Beberapa pihak dapat menggunakan cookies untuk melacak aktivitas pengguna secara online. Ini dapat menjadi masalah privasi jika tidak diatur dengan baik.
 
-Untuk mengatasi potensi risiko ini, penting untuk menggunakan HTTPS untuk mengenkripsi lalu lintas data, menghindari menyimpan data sensitif dalam cookies, dan mengimplementasikan praktik keamanan lainnya dalam pengembangan web Anda.
+Untuk mengatasi potensi risiko ini, penting untuk menggunakan HTTPS untuk mengenkripsi lalu lintas data, menghindari menyimpan data sensitif dalam cookies, dan mengimplementasikan praktik keamanan lainnya dalam pengembangan web kita.
 
 5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
     A. Membuat Fungsi Registrasi, Login, dan Logout 
@@ -360,5 +360,73 @@ Untuk mengatasi potensi risiko ini, penting untuk menggunakan HTTPS untuk mengen
     6. Data pengguna terakhir login akan muncul di halaman main dan cookie akan dihapus ketika pengguna logout. Inspect element dan membuka bagian Application/Storage. Klik bagian Cookies dan kamu dapat melihat data cookies yang tersedia.
     
 
+PENJELASAN TUGAS 5:
+1. Manfaat dari Setiap Element Selector dan Kapan Waktu yang Tepat untuk Menggunakannya:
 
+    Type Selector: Memilih elemen berdasarkan jenis elemennya. Contoh: p { color: red; } akan mengubah warna teks semua elemen <p> menjadi merah. Gunakan saat kita ingin menerapkan gaya ke semua elemen dari jenis tertentu.
+
+    Class Selector: Memilih elemen berdasarkan atribut kelas. Contoh: .warning { color: orange; } akan mengubah warna teks elemen dengan kelas warning. Gunakan saat kita ingin menerapkan gaya ke sekelompok elemen tertentu tanpa memandang jenis elemennya.
+
+    ID Selector: Memilih elemen berdasarkan atribut ID. Contoh: #header { background-color: blue; } akan mengubah latar belakang elemen dengan ID header. Gunakan saat kita ingin menerapkan gaya ke satu elemen spesifik.
+
+    Descendant Selector: Memilih elemen berdasarkan hubungan keturunannya. Contoh: article p { font-size: 16px; } akan mengubah ukuran font semua elemen <p> yang berada di dalam elemen <article>. Gunakan saat kita ingin mempengaruhi elemen berdasarkan konteksnya dalam struktur dokumen.
+
+2. HTML5 Tags yang Saya Ketahui:
+
+    <article>: Representasi konten mandiri dalam dokumen.
+    <aside>: Konten sampingan yang terpisah dari konten halaman utama.
+    <details> dan <summary>: Digunakan untuk menampilkan atau menyembunyikan konten tambahan.
+    <figcaption> dan <figure>: Representasi konten seperti gambar, diagram, foto, kode, dan captionnya.
+    <footer>: Footer dari suatu bagian atau halaman.
+    <header>: Header dari suatu bagian atau halaman.
+    <nav>: Bagian dari halaman yang berisi navigasi.
+    <section>: Bagian mandiri dalam dokumen.
+    <time>: Representasi waktu.
+    ... dan banyak lagi.
+
+3. Perbedaan Antara Margin dan Padding:
+
+    Margin: Jarak di luar elemen, antara elemen dengan elemen lain di sekitarnya.
+    Padding: Jarak di dalam elemen, antara batas elemen dengan kontennya.
+    Visualisasikan sebuah kotak: padding adalah jarak antara konten kotak dengan batas kotak itu sendiri, sedangkan margin adalah jarak antara kotak tersebut dengan kotak lain di sekitarnya.
+
+4. Perbedaan Antara Framework CSS Tailwind dan Bootstrap. Kapan Menggunakan Bootstrap atau Tailwind:
+
+    - Bootstrap: Merupakan framework CSS paling populer yang menyediakan komponen desain yang sudah siap pakai dan terlihat rapih. Jika kita ingin membangun sebuah website dengan cepat dengan tampilan standar, Bootstrap adalah pilihan yang baik.
+
+    - Tailwind: Merupakan utility-first framework. Ini berarti kita membangun desain kita dengan menambahkan class-class ke elemen-elemen HTML. Ini memberikan kontrol lebih besar atas tampilan dan lebih fleksibel, tetapi memerlukan waktu lebih lama untuk menjadi terbiasa. Jika kita ingin kontrol lebih dan optimasi tampilan, Tailwind adalah pilihan yang baik.
+
+    - Gunakan Bootstrap saat kita ingin prototipe cepat atau menggunakan banyak komponen siap pakai. Gunakan Tailwind saat kita menginginkan kontrol desain yang lebih detail dan fleksibel, serta siap untuk investasi belajar awal yang lebih besar.
+
+5. LANGKAH-LANGKAH DALAM MEMENUHI CHECKLIST:
+    Pada masing-masing berkas html, saya menerapkan:
+    Include Bootstrap CSS: Pastikan kita telah menyertakan file CSS Bootstrap dalam template HTML kita. kita dapat melakukannya dengan menambahkan tag <link> ke file Bootstrap CSS dalam elemen <head> di setiap template yang membutuhkannya. Ini harus dilakukan dalam bagian <head> sebelum tag <link> lainnya yang merujuk ke stylesheet eksternal lainnya.
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    Gunakan Bootstrap Classes: Bootstrap menyediakan sejumlah kelas CSS yang dapat kita tambahkan ke elemen HTML kita untuk mengubah tampilan dan perilaku mereka. Misalnya, untuk membuat form yang terlihat bagus dengan Bootstrap, kita dapat mengggunakan kelas-kelas seperti form-group, form-control, dan btn pada elemen-elemen kita.
+
+    Navbar Bootstrap: Jika kita ingin membuat navbar menggunakan Bootstrap, kita dapat menggunakan komponen navbar dan kelas-kelas terkait seperti navbar-expand-lg, navbar-light, dan bg-light untuk mengatur tampilan dan perilaku navbar.
+
+    Card Bootstrap: Jika kita ingin membuat card menggunakan Bootstrap, kita dapat menggunakan komponen card dan kelas-kelas terkait seperti card-body, card-title, dan card-text untuk mengatur tampilan card kita.
+
+        Pada create_product.html, saya menginginkan keberadaan gambar yang bisa diunggah oleh user. Berikut adalah langkahnya: 
+        1. Model:
+        Tambahkan field ImageField ke model kita, misal local_image = models.ImageField(upload_to='products/', blank=True, null=True).
+        Jalankan makemigrations dan migrate untuk memperbarui database.
+        
+        2. Form:
+        Pastikan form kita dapat menangani ImageField.
+        Di form HTML, gunakan atribut enctype="multipart/form-data" untuk form yang mengandung file unggahan.
+        
+        3. View:
+        Gantikan: form = ProductForm(request.POST or None) dengan form = ProductForm(request.POST or None, request.FILES or None) agar Django menangani file yang diunggah.
+        
+        4. Template:
+        Tampilkan input field untuk local_image di template kita. Jika kita menggunakan {% for field in form %}, field tersebut akan otomatis muncul.
+        Untuk menampilkan gambar yang telah diunggah sebelumnya: Gunakan <img src="{{ product.local_image.url }}" alt="Product Image">.
+        
+        5. Settings & URL:
+        Konfigurasikan MEDIA_URL dan MEDIA_ROOT di settings.py.
+        Tambahkan konfigurasi di urls.py untuk melayani file media selama pengembangan.
 

@@ -34,20 +34,23 @@ def show_main(request):
         'class': 'PBP A', # Kelas PBP kamu
         'products': products,
         'product_count': product_count,
-        'last_login': request.COOKIES['last_login'], #menambahkan informasi cookie last_login pada response yang akan ditampilkan di halaman web
+        'last_login': request.COOKIES['last_login'],
+         #menambahkan informasi cookie last_login pada response yang akan ditampilkan di halaman web
     }
     return render(request, "main.html", context)
 
 #fungsi untuk menambahkan data produk scr otomatis saat data dikumpulkan
 def create_product(request):
-    form = ProductForm(request.POST or None) #memasukkan QueryDict berdasarkan input dari user
-
+    form = ProductForm(request.POST or None, request.FILES or None)
     if form.is_valid() and request.method == "POST":
-        product = form.save(commit=False)      #mencegar Django agar tidak langsung menyimpan objek ke database
-        product.user = request.user #menandakan objek tsb milik pengguna yg terotorisasi
+        product = form.save(commit=False)
+        product.user = request.user
+        if product.local_image and product.url_image:
+            # Kedua field diisi, Anda bisa menampilkan pesan kesalahan atau memprioritaskan salah satunya
+            form.add_error('url_image', 'Please provide either a local image or a URL, not both.')
+            return render(request, "create_product.html", {'form': form})
         product.save()
         return HttpResponseRedirect(reverse('main:show_main'))
-
     context = {'form': form}
     return render(request, "create_product.html", context)
 
@@ -137,6 +140,7 @@ def remove_product(request, id):
     # ngecek apakah produknya milik usernya terlebih dahulu
     if product.user == request.user:
         product.delete()
+        messages.success(request, 'Successfully removed product.')
         # Pertanyaan: Kenapa kalau ada product.save() disini malah bikin delete nya looping?
 
 

@@ -11,6 +11,8 @@ class Item(models.Model):
     amount = models.IntegerField()
     price = models.IntegerField()
     description = models.TextField()
+    local_image = models.ImageField(upload_to='products/', blank=True, null=True)
+    url_image = models.URLField(blank=True, null=True)
 # Create your models here.
 
 # (Models Challenge) Misalkan, aplikasi kamu ingin merepresentasikan data-data Employee dengan atribut:

@@ -7,29 +7,32 @@
             name="viewport"
             content="width=device-width, initial-scale=3.0"
         />
+        <link href="https://fonts.google.com/specimen/Gabarito" rel="stylesheet">
         <style>
+            
             table {
                 border-collapse: collapse;
                 width: 100%;
             }
     
             th, td {
-                border: 1px solid black;
-                padding: 8px;
-                text-align: left;
+                border: 2px solid black;
+                padding: 10px;
+                text-align: center;
             }
     
             tr:nth-child(even) {
-                background-color: #f2f2f2;
+                background-color: #fff7f7;
             }
 
-            h1 {background-color:teal;}
+            h1 {background-color:rgb(19, 145, 93);}
         </style>
         {% block meta %}
         {% endblock meta %}
+        
     </head>
 
-    <body style="background-color:powderblue;">
+    <body style="background-color:rgb(242, 218, 226);">
         {% block content %}
         {% endblock content %}
     </body>
