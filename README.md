@@ -5,6 +5,7 @@ NPM     : 2206083496
 Kelas   : PBP A
 
 Link Adaptable: https://little-goblin-inventory.adaptable.app/main
+Link PaaS PBP: http://rana-koesumastuti-tugas.pbp.cs.ui.ac.id/
 
 PENJELASAN TUGAS 2 PBP 
 1. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
