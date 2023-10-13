@@ -1,16 +1,15 @@
+
 #Keperluan Tugas 4
 import datetime
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
 # ditambahkan 3 baris impor 
-from django.http import HttpResponseRedirect
 from main.forms import ProductForm
-from django.urls import reverse
 from django.shortcuts import render
 
 # Menampilkan Data dalam bentuk
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotFound
 from django.core import serializers
 
 # Keperluan Tugas 4 
@@ -22,6 +21,10 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required #agar pengguna harus login sebelum mengakses suatu web
 
 from main.models import Item
+
+# Keperluan Tugas 6
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
 
 @login_required(login_url='/login') #membatasi pengguna untuk mengakses show_main khusus yg berhasil login
 def show_main(request):
@@ -145,3 +148,47 @@ def remove_product(request, id):
 
 
     return redirect('main:show_main')
+
+
+# KEPERLUAN TUGAS 6
+# MENAMBAHKAN FUNGSI UNTUK MENGEMBALIKAN DATA JSON
+def get_product_json(request):
+    product_item = Item.objects.all()
+    return HttpResponse(serializers.serialize('json', product_item))
+
+#  Membuat Fungsi untuk Menambahkan Produk dengan AJAX
+@csrf_exempt
+def create_ajax(request):
+    if request.method == 'POST':
+        name = request.POST.get("name")
+        price = request.POST.get("price")
+        amount = request.POST.get("amount")
+        description = request.POST.get("description")
+        user = request.user
+        local_image = request.FILES.get('local_image') 
+        url_image = request.POST.get("url_image")
+        
+        if local_image and url_image:
+            return JsonResponse({'error': 'Please provide either a local image or a URL, not both.'}, status=400)
+
+        new_product = Item(name=name, price=price, amount=amount, description=description, user=user, local_image=local_image if local_image else None, url_image=url_image if url_image else None)
+        new_product.save()
+
+        # Mengirimkan informasi produk baru sebagai respon JSON
+        data = {
+            'id': new_product.id,
+            'name': new_product.name,
+            'price': new_product.price,
+            'amount': new_product.amount,
+            'description': new_product.description,
+            'local_image': new_product.local_image.url if new_product.local_image else None, # asumsi Anda menggunakan ImageField atau FileField
+            'url_image': new_product.url_image,
+            'success': True,
+            # Anda bisa menambahkan lebih banyak field lainnya jika diperlukan
+        }
+        return JsonResponse(data, status=201)
+
+    return HttpResponseNotFound()
+
+
+

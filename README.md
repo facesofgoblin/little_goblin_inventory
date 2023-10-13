@@ -430,3 +430,83 @@ PENJELASAN TUGAS 5:
         Konfigurasikan MEDIA_URL dan MEDIA_ROOT di settings.py.
         Tambahkan konfigurasi di urls.py untuk melayani file media selama pengembangan.
 
+TUGAS 6
+1. **Perbedaan antara Asynchronous Programming dan Synchronous Programming**:
+
+   - **Synchronous Programming**: Dalam pemrograman sinkron, tugas dieksekusi satu per satu dalam urutan yang ditentukan. Setiap tugas harus menunggu tugas sebelumnya selesai sebelum bisa dijalankan. Ini berarti jika ada tugas yang memakan waktu lama, maka semua eksekusi akan terhenti atau "diblokir" hingga tugas tersebut selesai.
+
+   - **Asynchronous Programming**: Dalam pemrograman asinkron, tugas-tugas dieksekusi secara bersamaan atau di latar belakang. Ini memungkinkan tugas berlanjut tanpa harus menunggu tugas sebelumnya selesai. Saat tugas asinkron selesai, biasanya memicu callback atau promis yang memungkinkan tindakan selanjutnya. Hal ini berguna untuk menangani tugas yang memerlukan waktu, seperti permintaan jaringan atau operasi file, tanpa menghentikan eksekusi program.
+
+2. **Paradigma Event-Driven Programming**:
+
+   Paradigma event-driven programming mengacu pada pendekatan pemrograman di mana program merespons peristiwa atau event yang terjadi. Event bisa menjadi tindakan pengguna seperti mengklik tombol atau data yang tiba melalui jaringan. Dalam paradigma ini, program mendengarkan event dan menentukan tindakan yang harus diambil saat event terjadi.
+
+   Contoh penerapannya dalam tugas ini adalah ketika menggunakan event listener dalam JavaScript untuk menangani peristiwa seperti klik tombol "Tambah Item dengan AJAX". Ketika tombol diklik, fungsi `addProduct()` dipanggil, yang kemudian mengirim permintaan AJAX ke server untuk menambahkan produk baru. Ini adalah contoh penerapan paradigma event-driven programming.
+
+3. **Penerapan Asynchronous Programming pada AJAX**:
+
+   Pada AJAX (Asynchronous JavaScript and XML), pemrograman asinkron digunakan untuk mengirim permintaan ke server dan menerima respons tanpa menghentikan eksekusi program. Ini memungkinkan halaman web untuk tetap responsif saat menunggu data dari server. Pemrograman asinkron dalam AJAX biasanya dilakukan dengan menggunakan API Web seperti Fetch API atau XMLHttpRequest.
+
+4. **Perbandingan Fetch API dan jQuery untuk AJAX**:
+
+   - **Fetch API**:
+     - Kelebihan: Lebih ringan, bawaan browser modern, dukungan Promises, lebih fleksibel, tidak memerlukan library eksternal.
+     - Kekurangan: Membutuhkan lebih banyak kode jika Anda ingin menangani respons beraneka ragam, kurang kompatibel dengan browser lama.
+
+   - **jQuery**:
+     - Kelebihan: Abstraksi yang lebih tinggi, lebih mudah digunakan, kompatibel dengan berbagai browser, memiliki banyak plugin yang dapat membantu.
+     - Kekurangan: Tidak sesuai dengan pendekatan modern yang berfokus pada API Fetch dan Promises, ukuran lebih besar jika hanya digunakan untuk AJAX.
+
+   Pilihan antara Fetch API dan jQuery tergantung pada kebutuhan proyek Anda. Jika Anda berfokus pada pengembangan modern, Fetch API adalah pilihan yang baik karena lebih ringan dan berintegrasi dengan baik dengan Promises. Namun, jika Anda memiliki kebutuhan khusus atau proyek yang berjalan dengan versi browser yang lebih lama, jQuery masih merupakan pilihan yang valid. Yang terbaik adalah menyesuaikan teknologi yang digunakan dengan kebutuhan proyek dan kompatibilitas target.
+
+5. Menjelaskan langkah-langkah:
+    1. **AJAX GET**:
+        - **Ubah Kode Cards Data Item**:
+            - Pastikan kita telah menambahkan jQuery atau library AJAX lainnya ke file HTML kita.
+            - Pada halaman utama, buat sebuah fungsi AJAX yang akan mengambil data dari server:
+            - Panggil fungsi tersebut saat halaman dimuat untuk pertama kalinya.
+
+        - **Pengambilan Task Menggunakan AJAX GET**:
+            - Pastikan server kita mengembalikan data dalam format JSON saat mengakses endpoint `/path-to-get-items/`.
+            - Pada client-side, kita sudah mengatur pemanggilan data dengan fungsi yang tadi kita buat di atas.
+
+    2. **AJAX POST**:
+        - **Membuat Modal dengan Form**:
+            - Tambahkan struktur modal ke halaman kita. kita dapat menggunakan Bootstrap atau library lainnya untuk ini. Modal harus mengandung form untuk menambahkan item.
+            - Tambahkan tombol di halaman kita yang akan memicu modal untuk muncul.
+
+        - **Buat Fungsi View Baru**:
+            - Pada server-side (misalnya di Django), buat fungsi view yang akan menerima data POST dari form modal kita dan menyimpannya ke database. kita sudah memberikan contoh kode untuk ini (fungsi `create_ajax`).
+
+        - **Buat Path `/create-ajax/`**:
+            - Dalam file `urls.py` (jika kita menggunakan Django), tambahkan path yang mengarah ke fungsi view yang kita buat.
+                ```python
+                path('create-ajax/', create_ajax, name='create_ajax')
+                ```
+
+        - **Hubungkan Form ke Path `/create-ajax/`**:
+            - Dalam atribut `action` dari form kita di modal, tetapkan nilainya ke `/create-ajax/`.
+
+        - **Kirim Data dengan AJAX dan Refresh Konten**:
+            - Saat form dikirimkan, gunakan AJAX untuk mengirim data ke server tanpa me-refresh halaman:
+                ```javascript
+                $('#id-of-your-form').submit(function(e) {
+                    e.preventDefault(); // Mencegah form dari pengiriman normal
+                    let formData = new FormData(this);
+                    $.ajax({
+                        url: '/create-ajax/',
+                        type: 'POST',
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        success: function(response) {
+                            // Tutup modal
+                            $('#id-of-your-modal').modal('hide');
+                            // Bersihkan form
+                            $('#id-of-your-form')[0].reset();
+                            // Muat ulang item dengan AJAX
+                            loadItems();
+                        }
+                    });
+                });
+                ```

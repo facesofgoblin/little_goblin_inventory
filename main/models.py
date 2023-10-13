@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 class Item(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)    #menghubungkan satu produk dengan satu user melalui sebuah relationship
     name = models.CharField(max_length=255)
-    date_added = models.DateField(auto_now_add=True)
+    date_added = models.DateTimeField(auto_now_add=True)
     amount = models.IntegerField()
     price = models.IntegerField()
     description = models.TextField()

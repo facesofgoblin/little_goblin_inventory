@@ -1,5 +1,5 @@
 from django.urls import path
-from main.views import show_main
+from main.views import get_product_json, show_main
 from main.views import show_main, create_product
 from main.views import show_main, create_product, show_xml 
 from main.views import show_main, create_product, show_xml, show_json
@@ -15,6 +15,7 @@ from main.views import remove_product
 
 from django.conf import settings
 from django.conf.urls.static import static
+from main.views import create_ajax
 
 
 
@@ -35,6 +36,11 @@ urlpatterns = [
     path('reduce_amount/<int:id>/', reduce_amount, name='reduce_amount'),
     path('increase_amount/<int:id>/', increase_amount, name='increase_amount'),
     path('remove_product/<int:id>/', remove_product, name='remove_product'),
+
+    # KEPERLUAN TUGAS 6
+    path('get-product/', get_product_json, name='get_product_json'),
+    path('create-ajax/', create_ajax, name='create_ajax'),
+
 
 ]
 
