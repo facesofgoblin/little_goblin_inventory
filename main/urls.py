@@ -1,5 +1,5 @@
 from django.urls import path
-from main.views import get_product_json, show_main
+from main.views import create_product_flutter, get_product_json, show_main
 from main.views import show_main, create_product
 from main.views import show_main, create_product, show_xml 
 from main.views import show_main, create_product, show_xml, show_json
@@ -40,6 +40,9 @@ urlpatterns = [
     # KEPERLUAN TUGAS 6
     path('get-product/', get_product_json, name='get_product_json'),
     path('create-ajax/', create_ajax, name='create_ajax'),
+
+    #TUGAS 9
+    path('create-flutter/', create_product_flutter, name='create_product_flutter'),
 
 
 ]

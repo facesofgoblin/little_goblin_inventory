@@ -22,4 +22,5 @@ from django.urls import path, include
 urlpatterns = [
     path('', include('main.urls')),
     path('admin/', admin.site.urls),
+    path('auth/', include('authentication.urls')), #tugas9, menandakan setup autentikasi pd django untuk flutter selesai
 ]
